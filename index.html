@@ -76,10 +76,10 @@
     .scorer-card h4 { color: #f1f5f9; margin-bottom: 5px; font-size: 1.1rem; }
     .scorer-card span { color: #94a3b8; font-size: .95rem; }
 
-    .breaking-news {
+ .breaking-news {
   display: flex;
   align-items: center;
-  background: #dc2626; /* bright red */
+  background: #dc2626;
   color: white;
   font-weight: bold;
   padding: 12px 5%;
@@ -87,7 +87,7 @@
   gap: 15px;
   overflow: hidden;
   position: sticky;
-  top: 56px; /* right below navbar */
+  top: 56px;
   z-index: 1100;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
@@ -103,12 +103,11 @@
 .breaking-news-text {
   white-space: nowrap;
   overflow: hidden;
-  animation: scroll-left 20s linear infinite;
+  animation: scroll-left 25s linear infinite;
   outline: none;
 }
 
-.breaking-news-text:hover,
-.breaking-news-text:focus {
+.breaking-news-text:hover {
   animation-play-state: paused;
   cursor: pointer;
   text-decoration: underline;
@@ -253,7 +252,7 @@
     </div>
   </section>
 
-  <section class="breaking-news" aria-label="Breaking News">
+<section class="breaking-news" aria-label="Breaking News">
   <div class="breaking-news-label">BREAKING NEWS</div>
   <div id="espn-news" class="breaking-news-text" tabindex="0">
     Loading latest news...
@@ -261,30 +260,22 @@
 </section>
 
 <script>
-  const rssUrl = 'https://www.espn.com/espn/rss/news';
   const newsContainer = document.getElementById('espn-news');
+  const rssToJsonAPI = "https://api.rss2json.com/v1/api.json?rss_url=https://www.espn.com/espn/rss/news";
 
-  fetch(rssUrl)
-    .then(response => response.text())
-    .then(str => {
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(str, 'application/xml');
-      const items = xmlDoc.querySelectorAll('item');
-      const headlines = Array.from(items)
-        .map(item => {
-          const title = item.querySelector('title').textContent;
-          const link = item.querySelector('link').textContent;
-          return `<a href="${link}" target="_blank">${title}</a>`;
-        })
-        .join(' • ');
+  fetch(rssToJsonAPI)
+    .then(res => res.json())
+    .then(data => {
+      const headlines = data.items.slice(0, 10).map(item =>
+        `<a href="${item.link}" target="_blank" style="color:white; text-decoration:none;">${item.title}</a>`
+      ).join(' • ');
       newsContainer.innerHTML = headlines;
     })
-    .catch(error => {
-      console.error('Error fetching ESPN RSS feed:', error);
-      newsContainer.innerHTML = 'Failed to load news.';
+    .catch(err => {
+      console.error("Failed to load ESPN News:", err);
+      newsContainer.innerHTML = '⚠️ Unable to load breaking news at this time.';
     });
 </script>
-
 
  <section id="highlights">
   <h2>Latest Highlights</h2>
