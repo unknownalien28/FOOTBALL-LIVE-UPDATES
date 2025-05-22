@@ -1,325 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Football Live Updates</title>
-  <link rel="icon" href="logo.png" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f1f5f9; }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    nav {
-      position: sticky; top: 0; background: #111827; z-index: 1000;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 5%;
-    }
-    nav .logo { width: 50px; }
-    nav ul { display: flex; gap: 20px; list-style: none; }
-    nav li a { padding: 8px; transition: color .3s; }
-    nav li a:hover { color: #22d3ee; }
-
-    header {
-      position: relative; text-align: center; padding: 80px 5% 60px;
-      background: url('hero-bg.jpg') center/cover no-repeat;
-    }
-    header::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(15,23,42,0.75);
-    }
-    header * { position: relative; }
-    hea/* Breaking News Section */
-#breaking-news {
-  background-color: #fff;
-  padding: 2rem 1rem;
-  border-top: 4px solid #d00;
-  border-bottom: 1px solid #ccc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #000;
-}
-
-#breaking-news h2 {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #000;
-}
-
-#breaking-news .lead {
-  font-size: 1.2rem;
-  color: #222;
-  margin-bottom: 1.5rem;
-}
-
-#breaking-news .news-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#breaking-news .news-list li {
-  margin-bottom: 1.5rem;
-  padding: 1rem 1.5rem;
-  background-color: #f0f0f0;
-  border-left: 5px solid #d00;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  color: #000;
-}
-
-#breaking-news .news-list li strong {
-  font-size: 1.1rem;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.3rem;
-  color: #000;
-}
-
-#breaking-news .news-list li span {
-  font-size: 0.95rem;
-  color: #111;
-  line-height: 1.5;
-}
-
-#breaking-news .news-list li a {
-  color: #000;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-#breaking-news .news-list li a:hover {
-  text-decoration: none;
-    }der img {
-      width: 120px; margin-bottom: 20px;
-      margin-left: auto; margin-right: auto; display: block;
-    }
-    header h1 { font-size: 3rem; color: #22d3ee; margin-bottom: 15px; }
-    header p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px; }
-    .cta { display: inline-block; margin: 5px; padding: 12px 30px; border-radius: 8px; font-weight: bold; transition: background .3s; }
-    .cta.sofascore { background: #22d3ee; color: #0f172a; }
-    .cta.sofascore:hover { background: #0ea5e9; }
-    .cta.whatsapp { background: #25d366; color: #fff; }
-    .cta.whatsapp:hover { background: #1ebe5d; }
-
-/* Breaking News Section */
-#breaking-news {
-  background-color: #fff;
-  padding: 2rem 1rem;
-  border-top: 4px solid #d00;
-  border-bottom: 1px solid #ccc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #000;
-}
-
-#breaking-news h2 {
-  font-size: 2.2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #000;
-}
-
-#breaking-news .lead {
-  font-size: 1.2rem;
-  color: #222;
-  margin-bottom: 1.5rem;
-}
-
-#breaking-news .news-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#breaking-news .news-list li {
-  margin-bottom: 1.5rem;
-  padding: 1rem 1.5rem;
-  background-color: #f0f0f0;
-  border-left: 5px solid #d00;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  color: #000;
-}
-
-#breaking-news .news-list li strong {
-  font-size: 1.1rem;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.3rem;
-  color: #000;
-}
-
-#breaking-news .news-list li span {
-  font-size: 0.95rem;
-  color: #111;
-  line-height: 1.5;
-}
-
-#breaking-news .news-list li a {
-  color: #000;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-#breaking-news .news-list li a:hover {
-  text-decoration: none;
-}
-
-
-    .matches { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; }
-    .match-card {
-      flex: 0 0 260px; background: #1e293b; border-radius: 12px; padding: 20px; text-align: center;
-    }
-    .match-card h3 { color: #f1f5f9; margin-bottom: 8px; }
-    .match-card time { display: block; color: #94a3b8; margin-bottom: 12px; }
-    .match-card span { font-size: .9rem; color: #cbd5e1; }
-
-    .scorers {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
-      justify-content: center;
-      text-align: center;
-    }
-    .scorer-card {
-      background: #1e293b; border-radius: 12px; padding: 20px;
-    }
-    .scorer-card img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin: 0 auto 10px;
-    }
-    .scorer-card h4 { color: #f1f5f9; margin-bottom: 5px; font-size: 1.1rem; }
-    .scorer-card span { color: #94a3b8; font-size: .95rem; }
-
-   .video-slider {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding: 10px 0;
-  scroll-snap-type: x mandatory;
-}
-.video-container {
-  flex: 0 0 320px;
-  scroll-snap-align: start;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
-}
-.video-container iframe {
-  width: 100%;
-  height: 180px;
-  border: none;
-  border-radius: 12px;
-}
-    }
-
-    .newsletter form { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
-    .newsletter input {
-      padding: 12px; width: 280px; max-width: 100%; border: none; border-radius: 8px 0 0 8px;
-    }
-    .newsletter button {
-      padding: 12px 20px; border: none; border-radius: 0 8px 8px 0;
-      background: #22d3ee; color: #0f172a; font-weight: bold; cursor: pointer;
-    }
-    .newsletter button:hover { background: #0ea5e9; }
-
-    .partners-list {
-      display: flex; flex-direction: column; gap: 10px; align-items: center;
-    }
-    .partners-list a {
-      background: #1e293b; padding: 12px 20px; border-radius: 8px;
-      width: 100%; max-width: 400px; color: #f1f5f9; transition: background .3s;
-    }
-    .partners-list a:hover { background: #273449; }
-
-    footer {
-      text-align: center; padding: 30px 5%; background: #0e121f; color: #64748b; font-size: .9rem;
-    }
-    footer a { color: #22d3ee; }
-    footer a:hover { text-decoration: underline; }
-  </style>
-</head>
-<body>
-
-  <!-- Navbar -->
-  <nav>
-    <img class="logo" src="logo.png" alt="Football Live Updates Logo">
-    <ul>
-      <li><a href="#matches">Matches</a></li>
-      <li><a href="#scorers">Scorers</a></li>
-      <li><a href="#highlights">Highlights</a></li>
-      <li><a href="#newsletter">Newsletter</a></li>
-      <li><a href="#partners">Partners</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero Section -->
-  <header id="hero">
-    <img src="Logo.png" alt="Football Live Updates Logo" />
-    <h1>Football Live Updates</h1>
-    <p>Your #1 Source for Real-Time Match Updates, Scores & Highlights</p>
-    <a class="cta sofascore" href="https://app.sofascore.com/nixz/FootballLiveUpdates" target="_blank">View on Sofascore</a>
-    <a class="cta whatsapp" href="https://whatsapp.com/channel/0029Vab4uCYBlHpW1tBF4w0k" target="_blank">Join on WhatsApp</a>
-  </header>
-
-  <!-- Breaking News Section -->
-<section id="breaking-news">
-  <h2>Breaking News</h2>
-  <p class="lead">Stay updated with the latest breaking stories in the world of football.</p>
-  <ul class="news-list">
-    <li>
-      <strong>Luka Modrić to Depart Real Madrid After Club World Cup</strong> – Real Madrid captain Luka Modrić has announced he will leave the club following the 2025 FIFA Club World Cup; his final home appearance at the Santiago Bernabéu is this Saturday, May 24, against Real Sociedad. Since joining from Tottenham Hotspur in 2012, the 39-year-old has made nearly 600 appearances and won a club-record 28 trophies, including six Champions League and four LaLiga titles. Modrić pledged he will “always be a Madridista” after the tournament. ([Reuters]0)
-    </li>
-    <li>
-      <strong>Endrick Suffers Season-Ending Hamstring Injury</strong> – Real Madrid’s 18-year-old forward Endrick has been ruled out for at least two months with a right hamstring tendon injury sustained in their 2–0 win over Sevilla, forcing him to miss both the final LaLiga fixture this weekend and the upcoming Club World Cup in the U.S. ([Reuters]1)
-    </li>
-    <li>
-      <strong>2025 UEFA Champions League Final Set for May 31</strong> – Paris Saint-Germain will face Inter Milan in the Champions League final on Saturday, May 31, 2025 at the Allianz Arena in Munich, marking the first final under UEFA’s expanded 36-team format. ([AS]2)
-    </li>
-    <li>
-      <strong>Napoli Eye Serie A Title in Season Finale</strong> – Napoli can clinch the 2024/25 Serie A crown if they beat Cagliari on Friday; a draw would see them tied on points with Inter Milan, potentially forcing a play-off for the Scudetto. ([Al Jazeera]3)
-    </li>
-  </ul>
-</section>
-
-  <!-- Upcoming Matches -->
-  <section id="matches">
-    <h2>Upcoming Matches</h2>
-    <p class="lead">Never miss kick-off, see what’s next on the schedule.</p>
-    <div class="matches">
-      <div class="match-card">
-        <h2>EUFA CONFERENCE LEAGUE FINAL</h2>
-        <h3>Real Betis vs. Chelsea</h3>
-        <time>Wed, May 28 • 20:00 GMT</time>
-        <span>Tarczynski Arena Wroclaw, Poland</span>
-      </div>
-      <div class="match-card">
-        <h2>UEFA CHAMPIONS LEAGUE FINAL</h2>
-        <h3>Inter Milan vs. Paris Saint Germain</h3>
-        <time>Sat, May 31 • 20:00 GMT</time>
-        <span>Allianz Arena</span>
-      </div>
-      <div class="match-card">
-
-      <h2>Ea Sport La Liga | Matchday 38</h2>  
-        <h3>Athletic club vs.Barcelona</h3>
-        <time>Sun, May 25 • 20:00 GMT</time>
-        <span></span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Top Scorers -->
-  <section id="scorers">
-    <h2>Top Scorers by League</h2>
-    <p class="lead">Leading the Golden Boot races across Europe’s big five.</p>
-    <div class="scorers">
-      <div class="scorer-card">
+ass="scorer-card">
         <img src="Salah.jpg" alt="Mohamed Salah - Liverpool" />
         <h4>Mohamed Salah</h4>
         <span>Liverpool – 28 goals</span>
@@ -398,6 +77,318 @@
       <a href="mailto:Belofire619@gmail.com">Belo — Belofire619@gmail.com</a>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer>
+    Designed by Alien 👽 | <a href="https://wa.me/+2348100236360" target="_blank">Contact</a><br>
+    © 2025 Football Live Updates. All rights reserved.
+  </footer>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Football Live Updates</title>
+  <style>
+    /* Global */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #000;
+      background: #fff;
+      line-height: 1.6;
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .lead {
+      margin-top: 0.25rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Breaking News */
+    #breaking-news {
+      background: #fff;
+      padding: 2rem 1rem;
+      border-top: 4px solid #cc0000;
+      border-bottom: 1px solid #ccc;
+    }
+    #breaking-news h2 {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #000;
+      margin-bottom: 0.5rem;
+    }
+    #breaking-news .lead {
+      font-size: 1.2rem;
+      color: #222;
+    }
+    #breaking-news .news-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    #breaking-news .news-list li {
+      background: #f2f2f2;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid #cc0000;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    #breaking-news .news-list li strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+    #breaking-news .news-list li span {
+      font-size: 0.95rem;
+      color: #111;
+    }
+    #breaking-news .news-list li a {
+      color: #000;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+    #breaking-news .news-list li a:hover {
+      text-decoration: none;
+    }
+
+    /* Highlights */
+    #highlights {
+      padding: 2rem 1rem;
+    }
+    #highlights h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    #highlights .lead {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .video-slider {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+    }
+    .video-container {
+      flex: 0 0 300px;
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 170px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    /* Live Scores */
+    #live-scores {
+      background: #fff;
+      padding: 2rem 1rem;
+    }
+    #live-scores h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    #live-scores .lead {
+      font-size: 1.1rem;
+      color: #222;
+      margin-bottom: 1rem;
+    }
+    .livescore-widget iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+
+    /* Newsletter */
+    #newsletter {
+      padding: 2rem 1rem;
+      background: #f9f9f9;
+    }
+    #newsletter h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    #newsletter .lead {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    #newsletter form {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    #newsletter input[type="email"] {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    #newsletter button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: #cc0000;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    #newsletter button:hover {
+      background: #a30000;
+    }
+
+    /* Partners */
+    #partners {
+      padding: 2rem 1rem;
+    }
+    #partners h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    #partners .lead {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .partners-list a {
+      display: inline-block;
+      margin-right: 1rem;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .partners-list a:hover {
+      text-decoration: underline;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #222;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+    footer a:hover {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Breaking News -->
+  <section id="breaking-news">
+    <h2>Breaking News</h2>
+    <p class="lead">Stay updated with the hottest football headlines.</p>
+    <ul class="news-list">
+      <li>Loading latest news…</li>
+    </ul>
+  </section>
+
+  <!-- Latest Highlights -->
+  <section id="highlights">
+    <h2>Latest Highlights</h2>
+    <p class="lead">Watch the most spectacular goals and moments.</p>
+    <div class="video-slider">
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/NsOLWcNK_d4?rel=0&modestbranding=1" 
+          title="EUROPA LEAGUE FINAL 2025" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/XlnGMIKCYWg?rel=0&modestbranding=1" 
+          title="OUSMANE DEMBELE SKILL 2025" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/vDjlSkvNuUk?rel=0&modestbranding=1" 
+          title="BARCELONA HIGHLIGHTS 2025" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <!-- Add more videos by duplicating the .video-container -->
+    </div>
+  </section>
+
+  <!-- Live Scores -->
+  <section id="live-scores">
+    <h2>Live Scores</h2>
+    <p class="lead">Follow ongoing matches in real time.</p>
+    <div class="livescore-widget">
+      <iframe 
+        src="https://www.sofascore.com/livescore" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section id="newsletter">
+    <h2>Newsletter Signup</h2>
+    <p class="lead">Weekly digests straight to your inbox—stay in the loop.</p>
+    <form action="#" method="POST">
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Partners -->
+  <section id="partners">
+    <h2>Partners & Sponsors</h2>
+    <p class="lead">Proudly backed by:</p>
+    <div class="partners-list">
+      <a href="mailto:omotundeadedapo50@gmail.com">Alien 👽 — omotundeadedapo50@gmail.com</a>
+      <a href="mailto:Belofire619@gmail.com">Belo — Belofire619@gmail.com</a>
+    </div>
+  </section>
+
+  <!-- Auto-fetch Breaking News from ESPN RSS via rss2json.com -->
+  <script>
+    const newsListEl = document.querySelector('#breaking-news .news-list');
+    const RSS2JSON_KEY = 'YOUR_RSS2JSON_KEY'; // sign up free at https://rss2json.com
+
+    async function fetchBreakingNews() {
+      try {
+        const res = await fetch(
+          `https://api.rss2json.com/v1/api.json?` +
+          new URLSearchParams({
+            rss_url: 'https://www.espn.com/espn/rss/news',
+            api_key: RSS2JSON_KEY,
+            count: 5
+          })
+        );
+        const { items } = await res.json();
+        newsListEl.innerHTML = items.map(item =>
+          `<li>
+             <strong>${item.title}</strong>
+             <span>${item.description.replace(/<[^>]+>/g, '').slice(0, 120)}… 
+               <a href="${item.link}" target="_blank">Read more</a>
+             </span>
+           </li>`
+        ).join('');
+      } catch (err) {
+        console.error('News fetch error:', err);
+        newsListEl.innerHTML = '<li>Unable to load news. Please try again later.</li>';
+      }
+    }
+
+    // initial load + refresh every 5 minutes
+    fetchBreakingNews();
+    setInterval(fetchBreakingNews, 5 * 60 * 1000);
+  </script>
 
   <!-- Footer -->
   <footer>
