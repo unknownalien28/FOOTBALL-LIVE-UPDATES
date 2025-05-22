@@ -76,51 +76,65 @@
     .scorer-card h4 { color: #f1f5f9; margin-bottom: 5px; font-size: 1.1rem; }
     .scorer-card span { color: #94a3b8; font-size: .95rem; }
 
- .breaking-news {
-  display: flex;
-  align-items: center;
-  background: #dc2626;
-  color: white;
-  font-weight: bold;
-  padding: 12px 5%;
-  font-size: 1.1rem;
-  gap: 15px;
-  overflow: hidden;
-  position: sticky;
-  top: 56px;
-  z-index: 1100;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
-
-.breaking-news-label {
-  background: white;
-  color: #dc2626;
-  padding: 4px 12px;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
-.breaking-news-text {
-  white-space: nowrap;
-  overflow: hidden;
-  animation: scroll-left 25s linear infinite;
-  outline: none;
-}
-
-.breaking-news-text:hover {
-  animation-play-state: paused;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-@keyframes scroll-left {
-  0% {
-    transform: translateX(100%);
+ <style>
+  .breaking-news {
+    background-color: #c0392b; /* Red background */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    position: relative;
   }
-  100% {
-    transform: translateX(-100%);
+
+  .breaking-news-label {
+    font-weight: bold;
+    margin-right: 15px;
+    white-space: nowrap;
+    font-size: 16px;
+    background: #e74c3c;
+    padding: 4px 10px;
+    border-radius: 3px;
+    animation: pulse 2s infinite;
   }
-}
+
+  .breaking-news-text {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    display: inline-block;
+    animation: slide-left 60s linear infinite;
+  }
+
+  .breaking-news-text:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes slide-left {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      background-color: #e74c3c;
+    }
+    50% {
+      background-color: #c0392b;
+    }
+  }
+
+  .breaking-news-text a {
+    margin-right: 20px;
+  }
+</style>
 
    .video-slider {
   display: flex;
@@ -254,27 +268,55 @@
 
 <section class="breaking-news" aria-label="Breaking News">
   <div class="breaking-news-label">BREAKING NEWS</div>
-  <div id="espn-news" class="breaking-news-text" tabindex="0">
+  <div id="breaking-news-text" class="breaking-news-text" tabindex="0">
     Loading latest news...
   </div>
 </section>
 
 <script>
-  const newsContainer = document.getElementById('espn-news');
-  const rssToJsonAPI = "https://api.rss2json.com/v1/api.json?rss_url=https://www.espn.com/espn/rss/news";
+  const newsContainer = document.getElementById('breaking-news-text');
 
-  fetch(rssToJsonAPI)
-    .then(res => res.json())
-    .then(data => {
-      const headlines = data.items.slice(0, 10).map(item =>
-        `<a href="${item.link}" target="_blank" style="color:white; text-decoration:none;">${item.title}</a>`
-      ).join(' • ');
-      newsContainer.innerHTML = headlines;
-    })
-    .catch(err => {
-      console.error("Failed to load ESPN News:", err);
-      newsContainer.innerHTML = '⚠️ Unable to load breaking news at this time.';
+  const feeds = [
+    {
+      name: 'ESPN',
+      url: 'https://www.espn.com/espn/rss/news'
+    },
+    {
+      name: 'BBC',
+      url: 'http://feeds.bbci.co.uk/sport/rss.xml?edition=uk'
+    },
+    {
+      name: 'Goal',
+      url: 'https://www.goal.com/feeds/news?fmt=rss'
+    }
+  ];
+
+  function fetchAllNews() {
+    const fetchPromises = feeds.map(feed => {
+      const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}`;
+      return fetch(api)
+        .then(res => res.json())
+        .then(data => {
+          return data.items.slice(0, 3).map(item =>
+            `<a href="${item.link}" target="_blank" style="color:white; text-decoration:none;">
+              [${feed.name}] ${item.title}
+            </a>`
+          );
+        })
+        .catch(err => {
+          console.error(`Failed to fetch ${feed.name} news:`, err);
+          return [`<span style="color:yellow;">⚠️ ${feed.name} unavailable</span>`];
+        });
     });
+
+    Promise.all(fetchPromises).then(allNewsArrays => {
+      const allHeadlines = allNewsArrays.flat().join(' • ');
+      newsContainer.innerHTML = allHeadlines;
+    });
+  }
+
+  fetchAllNews(); // Initial load
+  setInterval(fetchAllNews, 5 * 60 * 1000); // Auto-refresh every 5 minutes
 </script>
 
  <section id="highlights">
