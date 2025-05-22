@@ -2,248 +2,199 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Football Live Updates</title>
+  <link rel="icon" href="logo.png" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    /* Global */
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #000;
-      background: #fff;
-      line-height: 1.6;
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f172a; color: #f1f5f9; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    nav {
+      position: sticky; top: 0; background: #111827; z-index: 1000;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 5%;
     }
-    h2 {
-      margin-top: 0;
+    nav .logo { width: 50px; }
+    nav ul { display: flex; gap: 20px; list-style: none; }
+    nav li a { padding: 8px; transition: color .3s; }
+    nav li a:hover { color: #22d3ee; }
+
+    header {
+      position: relative; text-align: center; padding: 80px 5% 60px;
+      background: url('hero-bg.jpg') center/cover no-repeat;
     }
-    .lead {
-      margin-top: 0.25rem;
-      margin-bottom: 1rem;
+    header::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15,23,42,0.75);
+    }
+    header * { position: relative; }
+    header img {
+      width: 120px; margin-bottom: 20px;
+      margin-left: auto; margin-right: auto; display: block;
+    }
+    header h1 { font-size: 3rem; color: #22d3ee; margin-bottom: 15px; }
+    header p { font-size: 1.2rem; color: #cbd5e1; margin-bottom: 25px; }
+    .cta { display: inline-block; margin: 5px; padding: 12px 30px; border-radius: 8px; font-weight: bold; transition: background .3s; }
+    .cta.sofascore { background: #22d3ee; color: #0f172a; }
+    .cta.sofascore:hover { background: #0ea5e9; }
+    .cta.whatsapp { background: #25d366; color: #fff; }
+    .cta.whatsapp:hover { background: #1ebe5d; }
+
+    section { padding: 60px 5%; }
+    section:nth-child(even) { background: #111827; }
+    section h2 { font-size: 2.25rem; color: #22d3ee; margin-bottom: 15px; text-align: center; }
+    .lead { color: #94a3b8; margin-bottom: 35px; text-align: center; }
+
+    .matches { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px; }
+    .match-card {
+      flex: 0 0 260px; background: #1e293b; border-radius: 12px; padding: 20px; text-align: center;
+    }
+    .match-card h3 { color: #f1f5f9; margin-bottom: 8px; }
+    .match-card time { display: block; color: #94a3b8; margin-bottom: 12px; }
+    .match-card span { font-size: .9rem; color: #cbd5e1; }
+
+    .scorers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      justify-content: center;
+      text-align: center;
+    }
+    .scorer-card {
+      background: #1e293b; border-radius: 12px; padding: 20px;
+    }
+    .scorer-card img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+    }
+    .scorer-card h4 { color: #f1f5f9; margin-bottom: 5px; font-size: 1.1rem; }
+    .scorer-card span { color: #94a3b8; font-size: .95rem; }
+
+    .video-thumb { position: relative; display: inline-block; cursor: pointer; }
+    .video-thumb img { border-radius: 12px; }
+    .play-btn {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 3rem; color: #fff; opacity: .85;
     }
 
-    /* Breaking News */
-    #breaking-news {
-      background: #fff;
-      padding: 2rem 1rem;
-      border-top: 4px solid #cc0000;
-      border-bottom: 1px solid #ccc;
+    .newsletter form { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .newsletter input {
+      padding: 12px; width: 280px; max-width: 100%; border: none; border-radius: 8px 0 0 8px;
     }
-    #breaking-news h2 {
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: #000;
-      margin-bottom: 0.5rem;
+    .newsletter button {
+      padding: 12px 20px; border: none; border-radius: 0 8px 8px 0;
+      background: #22d3ee; color: #0f172a; font-weight: bold; cursor: pointer;
     }
-    #breaking-news .lead {
-      font-size: 1.2rem;
-      color: #222;
-    }
-    #breaking-news .news-list {
-      list-style: none;
-      padding: 0;
-      margin: 1.5rem 0;
-    }
-    #breaking-news .news-list li {
-      background: #f2f2f2;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border-left: 5px solid #cc0000;
-      border-radius: 6px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    }
-    #breaking-news .news-list li strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 0.3rem;
-    }
-    #breaking-news .news-list li span {
-      font-size: 0.95rem;
-      color: #111;
-    }
-    #breaking-news .news-list li a {
-      color: #000;
-      font-weight: bold;
-      text-decoration: underline;
-    }
-    #breaking-news .news-list li a:hover {
-      text-decoration: none;
-    }
+    .newsletter button:hover { background: #0ea5e9; }
 
-    /* Highlights */
-    #highlights {
-      padding: 2rem 1rem;
-    }
-    #highlights h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    #highlights .lead {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-    .video-slider {
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-    }
-    .video-container {
-      flex: 0 0 300px;
-    }
-    .video-container iframe {
-      width: 100%;
-      height: 170px;
-      border: none;
-      border-radius: 4px;
-    }
-
-    /* Live Scores */
-    #live-scores {
-      background: #fff;
-      padding: 2rem 1rem;
-    }
-    #live-scores h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    #live-scores .lead {
-      font-size: 1.1rem;
-      color: #222;
-      margin-bottom: 1rem;
-    }
-    .livescore-widget iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-    }
-
-    /* Newsletter */
-    #newsletter {
-      padding: 2rem 1rem;
-      background: #f9f9f9;
-    }
-    #newsletter h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    #newsletter .lead {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-    #newsletter form {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    #newsletter input[type="email"] {
-      flex: 1;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
-    #newsletter button {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      background: #cc0000;
-      color: #fff;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    #newsletter button:hover {
-      background: #a30000;
-    }
-
-    /* Partners */
-    #partners {
-      padding: 2rem 1rem;
-    }
-    #partners h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    #partners .lead {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
+    .partners-list {
+      display: flex; flex-direction: column; gap: 10px; align-items: center;
     }
     .partners-list a {
-      display: inline-block;
-      margin-right: 1rem;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
+      background: #1e293b; padding: 12px 20px; border-radius: 8px;
+      width: 100%; max-width: 400px; color: #f1f5f9; transition: background .3s;
     }
-    .partners-list a:hover {
-      text-decoration: underline;
-    }
+    .partners-list a:hover { background: #273449; }
 
-    /* Footer */
     footer {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      background: #222;
-      color: #fff;
-      font-size: 0.9rem;
+      text-align: center; padding: 30px 5%; background: #0e121f; color: #64748b; font-size: .9rem;
     }
-    footer a {
-      color: #fff;
-      text-decoration: underline;
-    }
-    footer a:hover {
-      text-decoration: none;
-    }
+    footer a { color: #22d3ee; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-  <!-- Breaking News -->
-  <section id="breaking-news">
-    <h2>Breaking News</h2>
-    <p class="lead">Stay updated with the hottest football headlines.</p>
-    <ul class="news-list">
-      <li>Loading latest news…</li>
+  <!-- Navbar -->
+  <nav>
+    <img class="logo" src="logo.png" alt="Football Live Updates Logo">
+    <ul>
+      <li><a href="#matches">Matches</a></li>
+      <li><a href="#scorers">Scorers</a></li>
+      <li><a href="#highlights">Highlights</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="#partners">Partners</a></li>
     </ul>
-  </section>
+  </nav>
 
-  <!-- Latest Highlights -->
-  <section id="highlights">
-    <h2>Latest Highlights</h2>
-    <p class="lead">Watch the most spectacular goals and moments.</p>
-    <div class="video-slider">
-      <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/NsOLWcNK_d4?rel=0&modestbranding=1" 
-          title="EUROPA LEAGUE FINAL 2025" 
-          allowfullscreen>
-        </iframe>
+  <!-- Hero Section -->
+  <header id="hero">
+    <img src="logo.png" alt="Football Live Updates Logo" />
+    <h1>Football Live Updates</h1>
+    <p>Your #1 Source for Real-Time Match Updates, Scores & Highlights</p>
+    <a class="cta sofascore" href="https://app.sofascore.com/nixz/FootballLiveUpdates" target="_blank">View on Sofascore</a>
+    <a class="cta whatsapp" href="https://wa.me/+2348100236360" target="_blank">Join on WhatsApp</a>
+  </header>
+
+  <!-- Matches -->
+  <section id="matches">
+    <h2>Upcoming Matches</h2>
+    <p class="lead">Never miss kick-off—see what’s next on the schedule.</p>
+    <div class="matches">
+      <div class="match-card">
+        <h3>Arsenal vs. Chelsea</h3>
+        <time>Sat, May 24 • 17:30 GMT</time>
+        <span>Emirates Stadium</span>
       </div>
-      <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/XlnGMIKCYWg?rel=0&modestbranding=1" 
-          title="OUSMANE DEMBELE SKILL 2025" 
-          allowfullscreen>
-        </iframe>
+      <div class="match-card">
+        <h3>Real Madrid vs. Barcelona</h3>
+        <time>Sun, May 25 • 19:00 GMT</time>
+        <span>Santiago Bernabéu</span>
       </div>
-      <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/vDjlSkvNuUk?rel=0&modestbranding=1" 
-          title="BARCELONA HIGHLIGHTS 2025" 
-          allowfullscreen>
-        </iframe>
+      <div class="match-card">
+        <h3>Bayern Munich vs. Dortmund</h3>
+        <time>Mon, May 26 • 18:45 GMT</time>
+        <span>Allianz Arena</span>
       </div>
-      <!-- Add more videos by duplicating the .video-container -->
     </div>
   </section>
 
-  <!-- Live Scores -->
-  <section id="live-scores">
-    <h2>Live Scores</h2>
-    <p class="lead">Follow ongoing matches in real time.</p>
-    <div class="livescore-widget">
-      <iframe 
-        src="https://www.sofascore.com/livescore" 
-        allowfullscreen>
-      </iframe>
+  <!-- Top Scorers -->
+  <section id="scorers">
+    <h2>Top Scorers by League</h2>
+    <p class="lead">Leading the Golden Boot races across Europe’s big five.</p>
+    <div class="scorers">
+      <div class="scorer-card">
+        <img src="salah.jpg" alt="Mohamed Salah - Liverpool" />
+        <h4>Mohamed Salah</h4>
+        <span>Liverpool – 28 goals</span>
+      </div>
+      <div class="scorer-card">
+        <img src="mbappe.jpg" alt="Kylian Mbappé - Real Madrid" />
+        <h4>Kylian Mbappé</h4>
+        <span>Real Madrid – 29 goals</span>
+      </div>
+      <div class="scorer-card">
+        <img src="retegui.jpg" alt="Mateo Retegui - Atalanta" />
+        <h4>Mateo Retegui</h4>
+        <span>Atalanta – 25 goals</span>
+      </div>
+      <div class="scorer-card">
+        <img src="kane.jpg" alt="Harry Kane - Bayern Munich" />
+        <h4>Harry Kane</h4>
+        <span>Bayern Munich – 26 goals</span>
+      </div>
+      <div class="scorer-card">
+        <img src="dembele.jpg" alt="Ousmane Dembélé - PSG" />
+        <h4>Ousmane Dembélé</h4>
+        <span>Paris Saint-Germain – 21 goals</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Highlights -->
+  <section id="highlights">
+    <h2>Latest Highlights</h2>
+    <p class="lead">Watch the most spectacular goals and moments.</p>
+    <div class="video-thumb" onclick="window.open('https://www.youtube.com/watch?v=KsK8ZTh4eMc','_blank')">
+      <img src="highlight-thumb.jpg" alt="Video Highlights">
+      <i class="fas fa-play-circle play-btn"></i>
     </div>
   </section>
 
@@ -251,10 +202,12 @@
   <section id="newsletter">
     <h2>Newsletter Signup</h2>
     <p class="lead">Weekly digests straight to your inbox—stay in the loop.</p>
-    <form action="#" method="POST">
-      <input type="email" name="email" placeholder="Enter your email" required>
-      <button type="submit">Subscribe</button>
-    </form>
+    <div class="newsletter">
+      <form action="#" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
   </section>
 
   <!-- Partners -->
@@ -267,41 +220,6 @@
     </div>
   </section>
 
-  <!-- Auto-fetch Breaking News from ESPN RSS via rss2json.com -->
-  <script>
-    const newsListEl = document.querySelector('#breaking-news .news-list');
-    const RSS2JSON_KEY = 'YOUR_RSS2JSON_KEY'; // sign up free at https://rss2json.com
-
-    async function fetchBreakingNews() {
-      try {
-        const res = await fetch(
-          `https://api.rss2json.com/v1/api.json?` +
-          new URLSearchParams({
-            rss_url: 'https://www.espn.com/espn/rss/news',
-            api_key: RSS2JSON_KEY,
-            count: 5
-          })
-        );
-        const { items } = await res.json();
-        newsListEl.innerHTML = items.map(item =>
-          `<li>
-             <strong>${item.title}</strong>
-             <span>${item.description.replace(/<[^>]+>/g, '').slice(0, 120)}… 
-               <a href="${item.link}" target="_blank">Read more</a>
-             </span>
-           </li>`
-        ).join('');
-      } catch (err) {
-        console.error('News fetch error:', err);
-        newsListEl.innerHTML = '<li>Unable to load news. Please try again later.</li>';
-      }
-    }
-
-    // initial load + refresh every 5 minutes
-    fetchBreakingNews();
-    setInterval(fetchBreakingNews, 5 * 60 * 1000);
-  </script>
-
   <!-- Footer -->
   <footer>
     Designed by Alien 👽 | <a href="https://wa.me/+2348100236360" target="_blank">Contact</a><br>
@@ -309,4 +227,4 @@
   </footer>
 
 </body>
-        </html>
+</html>
