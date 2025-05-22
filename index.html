@@ -76,6 +76,53 @@
     .scorer-card h4 { color: #f1f5f9; margin-bottom: 5px; font-size: 1.1rem; }
     .scorer-card span { color: #94a3b8; font-size: .95rem; }
 
+    .breaking-news {
+  display: flex;
+  align-items: center;
+  background: #dc2626; /* bright red */
+  color: white;
+  font-weight: bold;
+  padding: 12px 5%;
+  font-size: 1.1rem;
+  gap: 15px;
+  overflow: hidden;
+  position: sticky;
+  top: 56px; /* right below navbar */
+  z-index: 1100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.breaking-news-label {
+  background: white;
+  color: #dc2626;
+  padding: 4px 12px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.breaking-news-text {
+  white-space: nowrap;
+  overflow: hidden;
+  animation: scroll-left 20s linear infinite;
+  outline: none;
+}
+
+.breaking-news-text:hover,
+.breaking-news-text:focus {
+  animation-play-state: paused;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
    .video-slider {
   display: flex;
   gap: 20px;
@@ -205,6 +252,39 @@
       </div>
     </div>
   </section>
+
+  <section class="breaking-news" aria-label="Breaking News">
+  <div class="breaking-news-label">BREAKING NEWS</div>
+  <div id="espn-news" class="breaking-news-text" tabindex="0">
+    Loading latest news...
+  </div>
+</section>
+
+<script>
+  const rssUrl = 'https://www.espn.com/espn/rss/news';
+  const newsContainer = document.getElementById('espn-news');
+
+  fetch(rssUrl)
+    .then(response => response.text())
+    .then(str => {
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(str, 'application/xml');
+      const items = xmlDoc.querySelectorAll('item');
+      const headlines = Array.from(items)
+        .map(item => {
+          const title = item.querySelector('title').textContent;
+          const link = item.querySelector('link').textContent;
+          return `<a href="${link}" target="_blank">${title}</a>`;
+        })
+        .join(' • ');
+      newsContainer.innerHTML = headlines;
+    })
+    .catch(error => {
+      console.error('Error fetching ESPN RSS feed:', error);
+      newsContainer.innerHTML = 'Failed to load news.';
+    });
+</script>
+
 
  <section id="highlights">
   <h2>Latest Highlights</h2>
