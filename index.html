@@ -43,6 +43,67 @@
     .cta.whatsapp { background: #25d366; color: #fff; }
     .cta.whatsapp:hover { background: #1ebe5d; }
 
+    /* Breaking News Section Styles */
+#breaking-news {
+  background-color: #f9f9f9;
+  padding: 2rem 1rem;
+  border-top: 4px solid #e00;
+  border-bottom: 1px solid #ddd;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#breaking-news h2 {
+  color: #e00;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+#breaking-news .lead {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+#breaking-news .news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#breaking-news .news-list li {
+  margin-bottom: 1.5rem;
+  padding-left: 1.2rem;
+  position: relative;
+  border-left: 3px solid #e00;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+#breaking-news .news-list li::before {
+  content: "📰";
+  position: absolute;
+  left: -1.5rem;
+  top: 1.2rem;
+  font-size: 1.2rem;
+}
+
+#breaking-news .news-list li strong {
+  display: block;
+  font-size: 1.1rem;
+  color: #222;
+  margin-bottom: 0.3rem;
+}
+
+#breaking-news .news-list li a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+#breaking-news .news-list li a:hover {
+  text-decoration: underline;
+}
     section { padding: 60px 5%; }
     section:nth-child(even) { background: #111827; }
     section h2 { font-size: 2.25rem; color: #22d3ee; margin-bottom: 15px; text-align: center; }
@@ -146,6 +207,26 @@
     <a class="cta sofascore" href="https://app.sofascore.com/nixz/FootballLiveUpdates" target="_blank">View on Sofascore</a>
     <a class="cta whatsapp" href="https://whatsapp.com/channel/0029Vab4uCYBlHpW1tBF4w0k" target="_blank">Join on WhatsApp</a>
   </header>
+
+  <!-- Breaking News Section -->
+<section id="breaking-news">
+  <h2>Breaking News</h2>
+  <p class="lead">Stay updated with the latest breaking stories in the world of football.</p>
+  <ul class="news-list">
+    <li>
+      <strong>Luka Modrić to Depart Real Madrid After Club World Cup</strong> – Real Madrid captain Luka Modrić has announced he will leave the club following the 2025 FIFA Club World Cup; his final home appearance at the Santiago Bernabéu is this Saturday, May 24, against Real Sociedad. Since joining from Tottenham Hotspur in 2012, the 39-year-old has made nearly 600 appearances and won a club-record 28 trophies, including six Champions League and four LaLiga titles. Modrić pledged he will “always be a Madridista” after the tournament. ([Reuters]0)
+    </li>
+    <li>
+      <strong>Endrick Suffers Season-Ending Hamstring Injury</strong> – Real Madrid’s 18-year-old forward Endrick has been ruled out for at least two months with a right hamstring tendon injury sustained in their 2–0 win over Sevilla, forcing him to miss both the final LaLiga fixture this weekend and the upcoming Club World Cup in the U.S. ([Reuters]1)
+    </li>
+    <li>
+      <strong>2025 UEFA Champions League Final Set for May 31</strong> – Paris Saint-Germain will face Inter Milan in the Champions League final on Saturday, May 31, 2025 at the Allianz Arena in Munich, marking the first final under UEFA’s expanded 36-team format. ([AS]2)
+    </li>
+    <li>
+      <strong>Napoli Eye Serie A Title in Season Finale</strong> – Napoli can clinch the 2024/25 Serie A crown if they beat Cagliari on Friday; a draw would see them tied on points with Inter Milan, potentially forcing a play-off for the Scudetto. ([Al Jazeera]3)
+    </li>
+  </ul>
+</section>
 
   <!-- Upcoming Matches -->
   <section id="matches">
